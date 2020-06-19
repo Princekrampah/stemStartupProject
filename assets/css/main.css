@@ -1,0 +1,136 @@
+/* Space adjusted for the top navigation bar */
+body {
+  padding-top: 3.7rem;
+}
+
+/* Mark the canvas borders */
+canvas {
+  border: 0.2rem solid rgb(100, 100, 100);
+}
+
+.icon-span i{
+ color: white
+}
+
+.navbar{
+  border-bottom: 5px solid rgb(82, 188, 230);
+}
+
+.icon{
+  background: rgb(82, 188, 230);
+  border-radius: 50%;
+  padding: 0.3em;
+  margin-left: 30px;
+  cursor: pointer;
+}
+
+.profile-banner{
+  background: rgb(255, 253, 253);
+  color: black;
+  border-radius: 2%;
+  border : 5px solid rgb(82, 188, 230);
+}
+
+.card-text{
+  text-decoration: none;
+  color: tomato;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+.card-text:hover{
+  text-decoration: none;
+  color: gray;
+}
+
+.section-2 .row{
+  background: rgb(82, 188, 230);
+  border-top: 5px solid tomato;
+  padding-top: 5%;
+}
+
+.section-2 p{
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.section-2 .section-heading{
+  text-align: right;
+  font-size:  30px;
+  font-weight: bold;
+
+}
+
+.section-2 .section-desc{
+  text-align: justify;
+  color: white;
+}
+
+.section-heading-2{
+  font-size: 40px;
+  font-weight: bold;
+  color: tomato;
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+
+.profile-pic{
+  height: 200px;
+  width: 200px;
+  position: relative;
+  border: 5px solid rgb(82, 188, 230);
+  left: 40%;
+  transform: translate(-40%);
+}
+
+.bold-text{
+  font-weight: bold;
+  margin-top:10%;
+}
+
+.para{
+  text-align: justify;
+}
+
+
+.img-banner{
+  width : 30%;
+  height : 20%;
+  margin-top: -5%;
+  margin-bottom: -3%;
+}
+
+.banner-desc{
+  color: tomato;
+  font-weight: bold;
+  font-size: 800;
+}
+
+.game-sec img{
+  border-radius: 8%;
+  border: 5px solid rgba(27, 26, 26, 0.541);
+}
+
+.blue-text{
+  color:  rgb(82, 188, 230);
+}
+
+.orange-text{
+  color: tomato;
+}
+
+.section-desc h3{
+  color: tomato;
+  font-size:  30px;
+  font-weight: bold;
+}
+
+.play-link{
+  color: tomato;
+  margin-top:  20%;
+  font-size:  30px;
+  font-weight: bold;
+  text-decoration: none;
+}
