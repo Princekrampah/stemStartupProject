@@ -38,6 +38,9 @@ let currentCoin; // to identify the current coin in the iteration
 let jumpingCoins; // To count the number of jumping coins, which must not be more than 5.
 let coinXPosition;
 let x_position;
+let monsterInView;
+
+
 let timer = new Date()
 /**
  * Executed once and loads resources into RAM before setup() is executed
@@ -116,8 +119,8 @@ function setup() {
     fighter.dy = FIGHTER_DY;
     fighter.score = 0;
     fighter.finalScore = 0;
-    fighter.oldScore = 0;
     fighter.gameOver = false;
+    fighter.won = false;
 
 
 
@@ -129,7 +132,7 @@ function setup() {
 
 
 
-    for (let i = 0; i < 21; i++) {
+    for (let i = 0; i < 20; i++) {
 
         x_position = random(20 + i, WIDTH * 1.3) * 1.5;
         coinPositions.push(x_position)
@@ -149,6 +152,7 @@ function setup() {
 
     monsters = new Group();
     jumpingCoins = 0;
+    monsterInView = true;
 
 }
 
@@ -160,32 +164,32 @@ function setup() {
 function draw() {
 
 
-
+    fighter.finalScore = fighter.score * 1000
 
     /*
      *  create the monsters basing on random values to increase unpredictability
      */
 
-    if (frameCount % 55 == 0) {
-        if (random(0, 1) > 0.25) {
-            monster = createSprite(camera.position.x * 5.5, HEIGHT - OFFSET + 45);
-            monster.addAnimation('walk', animMonster);
-            monster.scale = 0.35;
-            // monster.setVelocity(-5, 0);
-            // monster.setCollider('circle', 0, 0, monster.width / 7);
-            monsters.add(monster);
-        }
-    }
 
-    for (let i = 0; i < monsters.length; i++) {
-        monsters[i].setCollider('circle', 0, 0, monsters[i].width / 7);
+
+    if (monster != undefined && monster.position.x >= fighter.position.x - WIDTH * 0.0008) {
+        monsterInView = false
+    }
+    if (monsterInView) {
+        monster = createSprite(camera.position.x * 5.5, HEIGHT - OFFSET + 45);
+        monster.addAnimation('walk', animMonster);
+        monster.scale = 0.35;
+        // setTimeout()
+        monsters.add(monster);
+    }
+    if (monster != undefined) {
+
         let speed = random(-5, -(timer.getSeconds()));
         speed = constrain(speed, -7, -25);
-        monsters[i].setVelocity(speed, 0);
-        console.log(monster.position.x + " " + fighter.position.x)
-        // while (monster.position.x > fighter.position.x + 500) {
-        //     console.log('yes')
-        // }
+        monster.setCollider('circle', 0, 0, monster.width / 7);
+        monster.setVelocity(speed, 0);
+        monsterInView = true
+
     }
 
 
@@ -272,10 +276,6 @@ function draw() {
 
 
     //  Setting the final score and score values
-    if (fighter.score > fighter.oldScore) {
-        fighter.oldScore = fighter.score
-        fighter.finalScore += 1000
-    }
 
 
     // Check if the monster has bitten the fighter. If true, game is over
@@ -289,9 +289,14 @@ function draw() {
         camera.position.x = fighter.position.x;
     }
 
+    if (fighter.position.x > WIDTH * 2.55) {
+        fighter.gameOver = true;
+    }
+
     if (coins.length == 0) {
         fighter.gameOver = true;
-        fighter.remove()
+        fighter.won = true;
+        fighter.position.y = HEIGHT - OFFSET
     }
 
     /*
@@ -324,6 +329,12 @@ function draw() {
         textAlign(CENTER);
         textSize(40);
         text('GAME OVER', camera.position.x, camera.position.y);
+
+        if (fighter.won) {
+            textAlign(CENTER);
+            textSize(40);
+            text('YOU WON', camera.position.x, camera.position.y + 100);
+        }
 
         textAlign(CENTER);
         textSize(30);
